@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home index</title>
+    <style>
+    table, th, td {
+        border: 1px solid black;
+    }
+    </style>
+  </head>
+  <body>
+    {% if name_package_map %}
+    {% for name, packages in name_package_map.items %}
+        <h3>{{name}}</h3>
+        <table style="width:80%">
+            <tr>
+                <th>物流公司</th>
+                <th>单号</th>
+                <th>重量(kg)</th>
+                <th>体积</th>
+                <th>物品信息</th>
+                <th>备注</th>
+                <th>团名</th>
+                <th>最近更新</th>
+            </tr>
+        {% for package in packages %}
+            <!--<li><a href='{% url "reports:detail" package.id %}'>{{package.tracking}}</a></li>-->
+            <tr>
+                <td>{{ package.logistics }}</td>
+                <td>{{ package.tracking }}</td>
+                <td>{{ package.weight }}</td>
+                <td>{{ package.volume }}</td>
+                <td>{{ package.item_info }}</td>
+                <td>{{ package.comment }}</td>
+                <td>{{ package.group }}</td>
+                <td>{{ package.last_update }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endfor %}
+    {% else %}
+        <form action="{% url 'reports:group' %}" method = "get">
+        {% csrf_token %}
+        <label for="groups">Choose a group:</label>
+        <select name="groups" onchange="this.form.submit()">
+            <option selected disabled>---</option>
+        {% if group_list %}
+            {% for group in group_list %}
+            <option value="{{group}}">{{ group }}</option>
+            {% endfor %}
+        {% endif %}
+        </select>
+        </form>
+    {% endif %}
+  </body>
+</html>
