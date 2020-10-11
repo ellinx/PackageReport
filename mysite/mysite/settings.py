@@ -25,7 +25,7 @@ SECRET_KEY = 'xy+r(4_$bt(y=tod2@&1mbdl768b1snp8=mb7=r3fwoxh3m0ot'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ellin.pythonanywhere.com]
+ALLOWED_HOSTS = ['ellin.pythonanywhere.com']
 
 
 # Application definition
